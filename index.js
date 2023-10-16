@@ -1,5 +1,23 @@
 const express = require('express')
 const app = express()
+const mongoose = require('mongoose')
+const Watch = require('./model/Watch')
+
+
+mongoose.connect('mongodb://127.0.0.1:27017/asmita')
+  .then(() => console.log('Database Connected!'))
+  .catch(err =>{
+    console.log(err)
+  })
+
+app.get('.api/asmita',(req,res) =>{
+    let watches = Watch.find({})
+    .then(res =>{
+        console.log(watches)
+    })
+    console.log(watches)
+    res.send("mongoose used")
+})
 
 
 function checkAuthentication(req, res, next) {
